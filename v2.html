@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Món quà đặc biệt 💖</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+        input {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatUp 2s infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="container" id="login-container">
+        <h2>Đăng nhập dành riêng cho Hải Yến 💕</h2>
+        <input type="text" id="username" placeholder="Tên em khong dấu viết liền ó">
+        <input type="password" id="password" placeholder="Ngày tháng năm sinh của em">
+        <button onclick="checkLogin()">Đăng nhập</button>
+        <p id="error" style="color: red; display: none;">Sai thông tin đăng nhập! ❌</p>
+    </div>
+    
+    <div class="container hidden" id="valentine-invite">
+        <h2>Hải Yến ơi! 💖</h2>
+        <img src="https://media.tenor.com/8KLgUow5hKAAAAAi/doraemon.gif" alt="Doraemon Love" width="150">
+        <p>Em hãy là valentines của anh quài quài luôn nhaaaaaa 💘</p>
+        <button onclick="acceptInvite()">Có 💖</button>
+        <button onclick="runAway()" id="no">Khong 💔</button>
+    </div>
+    
+    <script>
+        function checkLogin() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username === "Haiyen" && password === "18052007") {
+                document.getElementById("login-container").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("login-container").classList.add("hidden");
+                    document.getElementById("valentine-invite").classList.remove("hidden");
+                    document.getElementById("bg-music").play();
+                }, 500);
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+        
+        function acceptInvite() {
+            document.body.innerHTML = '<h1 style="color:#d63384;"> yeahhhh!! cảm ơn em.... Hải Yến siu cuteeee 💕</h1>';
+        }
+        
+        function runAway() {
+            let button = document.getElementById("no");
+            button.style.position = "absolute";
+            button.style.left = Math.random() * (window.innerWidth - 100) + "px";
+            button.style.top = Math.random() * (window.innerHeight - 50) + "px";
+        }
+        
+        function createHeart() {
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.className = "heart";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = window.innerHeight + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
